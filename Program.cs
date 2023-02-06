@@ -1,86 +1,69 @@
 ﻿using System;
 
-namespace _02._Summer_Outfit
+namespace _08._On_Time_for_the_Exam
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            int grade = int.Parse(Console.ReadLine());
-            string partOfDay = Console.ReadLine();
+            int examHour = int.Parse(Console.ReadLine());
+            int examMins = int.Parse(Console.ReadLine());
+            int arrivalHour = int.Parse(Console.ReadLine());
+            int arrivelMins = int.Parse(Console.ReadLine());
 
-            string outfit = "";
-            string shoes = "";
+            int examTimeInMins = examHour * 60 + examMins;
+            int arrivalTimeInMins = arrivalHour * 60 + arrivelMins;
 
-            switch (partOfDay)
+            int difference = examTimeInMins- arrivalTimeInMins;
+
+            int differenceHours = Math.Abs(difference / 60);
+            int differenceMins = Math.Abs(difference % 60);
+
+            if (difference == 0)
             {
+                Console.WriteLine("On time");
+            }
+            else if (difference > 0)
+            {
+                // on time OR much earlier
+                //On time
+                //30 minutes before the start
+                if (difference <= 30)
+                {
+                    // on time
+                    Console.WriteLine("On time");
+                    Console.WriteLine($"{differenceMins} minutes before the start");
 
-                case "Morning":
-                    if (grade >= 10 &&  grade <= 18)
+                }
+                else
+                {
+                    if (differenceHours <= 0)
                     {
-                        outfit = "Sweatshirt";
-                        shoes = "Sneakers";
-                    }
-                    else if (grade > 18 && grade <= 24 )
-                    {
-                        outfit = "Shirt";
-                        shoes = "Moccasins";
-                    }
-                    else
-                    {
-                        outfit = "T-Shirt";
-                        shoes = "Sandals";
-                    }
-                    break;
-                case "Afternoon":
-                    if (grade >= 10 && grade <= 18)
-                    {
-                        outfit = "Shirt";
-                        shoes = "Moccasins";
-                    }
-                    else if (grade > 18 && grade <= 24)
-                    {
-                        outfit = "T-Shirt";
-                        shoes = "Sandals";
+                        Console.WriteLine("Early");
+                        Console.WriteLine($"{differenceMins} minutes before the start");
                     }
                     else
                     {
-                        outfit = "Swim Suit";
-                        shoes = "Barefoot";
+                        Console.WriteLine("Early");
+                        Console.WriteLine($"{differenceHours}:{differenceMins:d2} hours before the start");
                     }
-                    break;
-                case "Evening":
-                    if (grade >= 10 && grade <= 18)
-                    {
-                        outfit = "Shirt";
-                        shoes = "Moccasins";
-                    }
-                    else if (grade > 18 && grade <= 24)
-                    {
-                        outfit = "Shirt";
-                        shoes = "Moccasins";
-                    }
-                    else
-                    {
-                        outfit = "Shirt";
-                        shoes = "Moccasins";
-                    }
-                    break;
-
-
-
-
-
-
-
-
-
-
-
+                    
+                }
+            }
+            else if (difference < 0)
+            {
+                Console.WriteLine("Late");
+                if (differenceHours <= 0)
+                {
+                    Console.WriteLine($"{differenceMins} minutes after the start");
+                }
+                else
+                {
+                    Console.WriteLine($"{differenceHours}:{differenceMins:d2} hours after the start");
+                }
+                
             }
 
-
-            Console.WriteLine($"It's {grade} degrees, get your {outfit} and {shoes}.");
         }
     }
 }
