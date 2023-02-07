@@ -1,42 +1,44 @@
 ﻿using System;
-using System.Net.WebSockets;
 
-namespace _05._Salary
+namespace _04._Clever_Lily
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            int openTabs = int.Parse(Console.ReadLine());
-            int salary = int.Parse(Console.ReadLine());
+            int age = int.Parse(Console.ReadLine());
+            double priceWashingMachine = double.Parse(Console.ReadLine());
+            int toyPrice = int.Parse(Console.ReadLine());
 
-            for (int i = 0; i < openTabs; i++)
+            int toysCounter = 0;
+            int savedMoney = 0;
+            int moneyTakenByLillysBrother = 0;
+            int moneyAdded = 10;
+
+            for (int i = 1; i <= age; i++)
             {
-                string currentTab = Console.ReadLine();
-                if (currentTab == "Facebook")
+                if (i % 2 != 0)
                 {
-                    salary -= 250;
+                    toysCounter++;
                 }
-                else if ( currentTab == "Instagram")
+                else
                 {
-                    salary -= 110;
-                }
-                else if (currentTab == "Reddit")
-                {
-                    salary -= 50;
-                }
-
-
-                if (salary <=0 )
-                {
-                    Console.WriteLine("You have lost your salary.");
-                    break;
+                    
+                    savedMoney += moneyAdded;
+                    moneyAdded += 10;
+                    moneyTakenByLillysBrother++;
                 }
             }
 
-            if (salary > 0)
+            int finalAmountSaved = savedMoney + toysCounter * toyPrice - moneyTakenByLillysBrother;
+
+            if (finalAmountSaved >= priceWashingMachine)
             {
-                Console.WriteLine(salary); 
+                Console.WriteLine($"Yes! {(double)finalAmountSaved -priceWashingMachine:F2}");
+            }
+            else
+            {
+                Console.WriteLine($"No! {priceWashingMachine - (double)finalAmountSaved:F2}");
             }
         }
     }
